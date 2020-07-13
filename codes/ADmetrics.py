@@ -518,6 +518,7 @@ def plot_roc_auv_curve_of_an_algorithm(alg_ms, gt_ms, data_name, alg_name,
     fig, axes = plt.subplots(nrows=3, figsize=(6, 15))
     ax = axes[0]
     ax.grid(True)
+    
     precision, recall, _ = metrics.precision_recall_curve(y_test, y_pred, )
 
     print("recalls values", rec_values)
@@ -587,6 +588,8 @@ def plot_roc_auv_curve_of_an_algorithm(alg_ms, gt_ms, data_name, alg_name,
 
     fig.savefig(os.path.join(dir_path, name_of_auc_roc_fig + '.png'))
 
+    plt.close()
+
     precisions.append(prec_values)
     recalls.append(recall)
     roc_auc_scores.append(roc_auc_score)
@@ -628,5 +631,7 @@ def plot_train_valid_curves_of_algorithm(acc, val_acc, v, C, loss, val_loss,
         os.mkdir(dir_path)
 
     plt.savefig(os.path.join(dir_path, name_of_train_val_fig + '.png'))
+
+    plt.close()
 
 
