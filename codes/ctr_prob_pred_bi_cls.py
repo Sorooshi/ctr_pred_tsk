@@ -99,6 +99,9 @@ so that after conversion the aforementioned issue will not occur.
 
 V = ['C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21']  # features_to_use
 
+# V = ['banner_pos', 'site_id', 'site_domain', 'app_category', 'device_id',
+#      'device_ip', 'device_model', 'device_type', 'device_conn_type']  # features_to_use
+
 # With selection the above features we indeed eliminate all the categorical features.
 # And moreover, some part of the our code, below, will never be used but I leave
 # as it was in order to show the correct way of dealing with the data set.
@@ -168,10 +171,13 @@ if __name__ == '__main__':
     variable_test_idx = set(np.arange(x_test.shape[0]))
 
     # V = set(x_in.columns.tolist())  # set of features
+    list_of_vs = range(5, len(V) + 1)
 
-    for v in range(2, len(V) + 1):
+    for v in list_of_vs:
 
-        C = list(itertools.combinations(V, v))  # v-th length combination of features
+        Cs = list(itertools.combinations(V, v))  # v-th length combination of features
+        list_idx_C = np.random.choice(len(Cs), size=4, replace=False)
+        C = [Cs[k] for k in list_idx_C]
 
         for c in C:
 
